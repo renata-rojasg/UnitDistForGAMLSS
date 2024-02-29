@@ -1,14 +1,3 @@
-#log-likelihood of the unit gamma
-UG<-expression(
-  sigma*log(mu^(1/sigma)/(1-mu^(1/sigma)))-log(gamma(sigma))+
-    (mu^(1/sigma)/(1-mu^(1/sigma))-1)*log(y)+
-    (sigma-1)*log(-log(y))
-)
-m1UG<-D(UG,"mu")
-s1UG<-D(UG,"sigma")
-ms2UG<-D(m1UG,"sigma")
-
-
 UG<-function (mu.link = "logit", sigma.link = "log") 
 {
   mstats <- checklink("mu.link", "UG", substitute(mu.link), 
@@ -32,28 +21,37 @@ UG<-function (mu.link = "logit", sigma.link = "log")
                  sigma.dr = dstats$mu.eta, 
                  
                  dldm = function(y, mu, sigma) {
-                   dldm <- eval(m1UG)
+                   dldm <- mu^(1/sigma)/((1-mu^(1/sigma))*mu^(1/sigma+1))*
+                     (1+mu^(1/sigma)/((1-mu^(1/sigma))*sigma)*log(y))
                    dldm
                  }, 
                  d2ldm2 = function(y,mu, sigma) {
-                   dldm <- eval(m1UG)
+                   dldm <- mu^(1/sigma)/((1-mu^(1/sigma))*mu^(1/sigma+1))*
+                     (1+mu^(1/sigma)/((1-mu^(1/sigma))*sigma)*log(y))
                    d2ldm2 <- -dldm * dldm
                    d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
                    d2ldm2
                  }, 
                  dldd = function(y, mu, sigma) {
-                   dldd <- eval(s1UG)
+                   dldd <- log(-log(y))-1/sigma*mu^(1/sigma)/(1-mu^(1/sigma))*log(mu)*
+                     (1+mu^(1/sigma)/((1-mu^(1/sigma))*sigma*mu^(1/sigma))*log(y))-
+                     log((1-mu^(1/sigma)))-digamma(sigma)
                    dldd
                  },
                  d2ldd2 = function(y,mu, sigma) {
-                   dldd <- eval(s1UG)
+                   dldd <- log(-log(y))-1/sigma*mu^(1/sigma)/(1-mu^(1/sigma))*log(mu)*
+                     (1+mu^(1/sigma)/((1-mu^(1/sigma))*sigma*mu^(1/sigma))*log(y))-
+                     log((1-mu^(1/sigma)))-digamma(sigma)
                    d2ldd2 = -dldd * dldd
                    d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
                    d2ldd2
                  },
                  d2ldmdd = function(y,mu, sigma) {
-                   dldm <- eval(m1UG)
-                   dldd <- eval(s1UG)
+                   dldm <- mu^(1/sigma)/((1-mu^(1/sigma))*mu^(1/sigma+1))*
+                     (1+mu^(1/sigma)/((1-mu^(1/sigma))*sigma)*log(y))
+                   dldd <- log(-log(y))-1/sigma*mu^(1/sigma)/(1-mu^(1/sigma))*log(mu)*
+                     (1+mu^(1/sigma)/((1-mu^(1/sigma))*sigma*mu^(1/sigma))*log(y))-
+                     log((1-mu^(1/sigma)))-digamma(sigma)
                    d2ldmdd = -(dldm * dldd)
                    d2ldmdd<-ifelse(is.na(d2ldmdd)==TRUE,0,d2ldmdd)
                    d2ldmdd  
