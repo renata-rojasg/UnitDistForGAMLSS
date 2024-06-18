@@ -6,8 +6,7 @@ m1UW<-D(UW,"mu")
 s1UW<-D(UW,"sigma")
 ms2UW<-D(m1UW,"sigma")
 
-
-UW<-function (mu.link = "logit", sigma.link = "identity") 
+UW<-function (mu.link = "logit", sigma.link = "log") 
 {
   tau<-.5
   mstats <- checklink("mu.link", "UW", substitute(mu.link), 
@@ -67,8 +66,9 @@ UW<-function (mu.link = "logit", sigma.link = "identity")
                    rqres(pfun = "pUW",  type = "Continuous", y = y, mu = mu, sigma = sigma)
                  ),
                  
-                 mu.initial = expression(     mu <- rep(median(y),length(y))),   
-                 sigma.initial = expression(sigma<- rep(4, length(y))),
+                 mu.initial = expression(     mu <- rep(0.5#median(y)
+                                                        ,length(y))),   
+                 sigma.initial = expression(sigma<- rep(0.5, length(y))),
                  mu.valid = function(mu) all(mu > 0 & mu < 1), 
                  sigma.valid = function(sigma)  all(sigma > 0),
                  y.valid = function(y) all(y > 0 &  y < 1)
