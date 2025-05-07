@@ -1,6 +1,6 @@
 # 📦 Unit Distributions for GAMLSS
 
-This repository provides R implementations of unit distributions to be used within the `gamlss.family` framework, allowing regression modeling for continuous variables bounded in the (0, 1) interval. These distributions are not yet included in the official `gamlss` R package. We focus on two-parameter distributions, with parameterizations based on the mean or median (denoted as &mu;) and shape or dispersion parameters (denoted as &sigma;).
+This repository provides R implementations of unit distributions to be used within the `gamlss.family` framework, allowing regression modeling for continuous variables bounded in the (0, 1) interval. These distributions are not yet included in the official `gamlss` R package. We focus on one and two-parameter distributions, with parameterizations based on the mean or median (denoted as &mu;) and shape or precision/dispersion parameters (denoted as &sigma;).
 
 ## 📚 List of Distributions
 ---
@@ -19,8 +19,7 @@ The functions `KW()` define the two-parameter Kumaraswamy distribution for use w
 
 ## Reflected Burr XII Distribution
 
-The `RUBXII()` function implements a reflected Burr XII distribution, parameterized by median (`mu`) and dispersion (`sigma`).  
-Helper functions: `dRUBXII`, `pRUBXII`, `qRUBXII`, `rRUBXII`.
+The `RUBXII()` function implements a reflected Burr XII distribution, parameterized by median (`mu`) and shape (`sigma`).  Supporting functions include: `dRUBXII`, `pRUBXII`, `qRUBXII`, `rRUBXII`.
 
 📌 See the R code: [`RUBXII_reg.R`](RUBXII_reg.R)  
 📄 See detailed documentation: [docs/RUBXII_functions.md](docs/RUBXII_functions.md)
@@ -31,8 +30,7 @@ Helper functions: `dRUBXII`, `pRUBXII`, `qRUBXII`, `rRUBXII`.
 
 ## Unit Gamma Distribution
 
-The `UG()` function defines a unit gamma distribution on (0,1), suitable for modeling rates or proportions.  
-Helper functions: `dUG`, `pUG`, `qUG`, `rUG`.
+The `UG()` function defines a unit gamma distribution , parameterized by mean (`mu`) and precision (`sigma`).  Supporting functions include: `dUG`, `pUG`, `qUG`, `rUG`.
 
 📌 See the R code: [`UG_reg.R`](UG_reg.R)  
 📄 See detailed documentation: [docs/UG_functions.md](docs/UG_functions.md)
@@ -44,11 +42,10 @@ Helper functions: `dUG`, `pUG`, `qUG`, `rUG`.
 
 ## Unit Lindley Distribution
 
-The `UL()` function defines a unit Lindley distribution, parameterized by `mu` and `sigma`, with support in (0,1).  
-Helper functions: `dUL`, `pUL`, `qUL`, `rUL`.
+The `ULindley()` function defines a unit Lindley distribution, , parameterized by mean (`mu`).  Supporting functions include: `dULindley`, `pULindley`, `qULindley`, `rULindley`.
 
 📌 See the R code: [`ULindley_reg.R`](ULindley_reg.R)  
-📄 See detailed documentation: [docs/UL_functions.md](docs/UL_functions.md)
+📄 See detailed documentation: [docs/ULindley_functions.md](docs/ULindley_functions.md)
 
 > **Reference:**  
 > Mazucheli, J., Menezes, A. F. B., & Chakraborty, S. (2019). On the one parameter unit-Lindley distribution and its associated regression model for proportion data. Journal of Applied Statistics, 46, 700–714.
@@ -58,8 +55,7 @@ Helper functions: `dUL`, `pUL`, `qUL`, `rUL`.
 
 ## Unit Weibull Distribution
 
-The `UW()` function provides a unit Weibull distribution for modeling proportions or percentages.  
-Helper functions: `dUW`, `pUW`, `qUW`, `rUW`.
+The `UW()` function provides a unit Weibull distribution , parameterized by median (`mu`) and shape (`sigma`).  Supporting functions include: `dUW`, `pUW`, `qUW`, `rUW`.
 
 📌 See the R code: [`UW_reg.R`](UW_reg.R)  
 📄 See detailed documentation: [docs/UW_functions.md](docs/UW_functions.md)

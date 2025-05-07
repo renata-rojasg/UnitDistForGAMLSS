@@ -8,13 +8,13 @@ s1<-D(kww,"sigma")
 ms2<-D(m1,"sigma")
 
 
-Kuma<-function (mu.link = "logit", sigma.link = "identity") 
+KW<-function (mu.link = "logit", sigma.link = "log") 
 {
-  mstats <- checklink("mu.link", "Kuma", substitute(mu.link), 
+  mstats <- checklink("mu.link", "KW", substitute(mu.link), 
                       c("logit", "probit", "cloglog", "cauchit", "log", "own"))
-  dstats <- checklink("sigma.link", "Kuma", substitute(sigma.link), 
+  dstats <- checklink("sigma.link", "KW", substitute(sigma.link), 
                       c("inverse", "log", "identity", "own"))
-  structure(list(family = c("Kuma", "Kumaraswamy"), 
+  structure(list(family = c("KW", "Kumaraswamy"), 
                  parameters = list(mu = TRUE, sigma = TRUE), 
                  nopar = 2, 
                  type = "Continuous", 
@@ -67,9 +67,9 @@ Kuma<-function (mu.link = "logit", sigma.link = "identity")
                    d2ldmdd<-ifelse(is.na(d2ldmdd)==TRUE,0,d2ldmdd)
                    d2ldmdd  
                  }, 
-                 G.dev.incr = function(y, mu, sigma, w, ...) -2 * log(dKuma(y=y, mu=mu, sigma=sigma)), 
+                 G.dev.incr = function(y, mu, sigma, w, ...) -2 * log(dKW(y=y, mu=mu, sigma=sigma)), 
                  rqres = expression(
-                   rqres(pfun = "pkum",  type = "Continuous", y = y, mu = mu, sigma = sigma)
+                   rqres(pfun = "pKW",  type = "Continuous", y = y, mu = mu, sigma = sigma)
                  ),
                  
                  mu.initial = expression(     mu <- rep(median(y),length(y))),   
@@ -83,7 +83,7 @@ Kuma<-function (mu.link = "logit", sigma.link = "identity")
 
 
 # density function
-dKuma<-function(y, mu = 0.7, sigma = 0.5, log = FALSE)
+dKW<-function(y, mu = 0.7, sigma = 0.5, log = FALSE)
 {
   if (any(mu <= 0) | any(mu >= 1)) stop(paste("mu must be between 0 and 1", "\n", ""))
   if (any(sigma <= 0)) stop(paste("sigma must be positive", "\n", "")) 
@@ -96,7 +96,7 @@ dKuma<-function(y, mu = 0.7, sigma = 0.5, log = FALSE)
 }
 #------------------------------------------------------------------------------------------ #ok
 # cumulative distribution function
-pkum<-function(q, mu = 0.7, sigma = 0.5, lower.tail = TRUE, log.p = FALSE){
+pKW<-function(q, mu = 0.7, sigma = 0.5, lower.tail = TRUE, log.p = FALSE){
   if (any(mu <= 0) | any(mu >= 1)) stop(paste("mu must be between 0 and 1", "\n", ""))
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
   if (any(q <= 0) | any(q >= 1)) stop(paste("x must be between 0 and 1", "\n", ""))
@@ -109,7 +109,7 @@ pkum<-function(q, mu = 0.7, sigma = 0.5, lower.tail = TRUE, log.p = FALSE){
 }
 #------------------------------------------------------------------------------------------ #ok
 # quantile function
-qkum<-function(u,mu,sigma,a=0,b=1)
+qKW<-function(u,mu,sigma,a=0,b=1)
 {
   if (any(mu <= 0) | any(mu >= 1)) stop(paste("mu must be between 0 and 1", "\n", ""))
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -119,7 +119,7 @@ qkum<-function(u,mu,sigma,a=0,b=1)
 }
 
 # inversion method for randon generation
-rkum<-function(n,mu,sigma,a=0,b=1)
+rKW<-function(n,mu,sigma,a=0,b=1)
 {
   u<- runif(n)
   y<- a + (b-a)*( 1-(1-u)^( (log(1-mu^sigma))/(log(0.5)) ) )^(1/sigma)
