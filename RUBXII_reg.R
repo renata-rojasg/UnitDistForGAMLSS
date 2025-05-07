@@ -9,7 +9,7 @@ s1<-D(lRUBXII,"sigma")
 ms2<-D(m1,"sigma")
 
 
-RUBXII<-function (mu.link = "logit", sigma.link = "identity") 
+RUBXII<-function (mu.link = "logit", sigma.link = "log") 
 {
   tau<-.5
   mstats <- checklink("mu.link", "RUBXII", substitute(mu.link), 
