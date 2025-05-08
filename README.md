@@ -17,7 +17,7 @@ The functions `KW()` define the two-parameter Kumaraswamy distribution for use w
 
 
 
-## Reflected Burr XII Distribution
+### Reflected Burr XII Distribution
 
 The `RUBXII()` function implements a reflected Burr XII distribution, parameterized by median (`mu`) and shape (`sigma`).  Supporting functions include: `dRUBXII`, `pRUBXII`, `qRUBXII`, `rRUBXII`.
 
@@ -28,7 +28,7 @@ The `RUBXII()` function implements a reflected Burr XII distribution, parameteri
 > Ribeiro, T.F.; Cordeiro, G.M.; Peña-Ramírez, F.A.; Guerra, R.R. A New Quantile Regression for the COVID-19 Mortality Rates in the United States. Comput. Appl. Math. 2021, 40, 255.
 ---
 
-## Unit Gamma Distribution
+### Unit Gamma Distribution
 
 The `UG()` function defines a unit gamma distribution , parameterized by mean (`mu`) and precision (`sigma`).  Supporting functions include: `dUG`, `pUG`, `qUG`, `rUG`.
 
@@ -40,7 +40,7 @@ The `UG()` function defines a unit gamma distribution , parameterized by mean (`
 
 ---
 
-## Unit Lindley Distribution
+### Unit Lindley Distribution
 
 The `ULindley()` function defines a unit Lindley distribution, , parameterized by mean (`mu`).  Supporting functions include: `dULindley`, `pULindley`, `qULindley`, `rULindley`.
 
@@ -53,7 +53,7 @@ The `ULindley()` function defines a unit Lindley distribution, , parameterized b
 
 ---
 
-## Unit Weibull Distribution
+### Unit Weibull Distribution
 
 The `UW()` function provides a unit Weibull distribution , parameterized by median (`mu`) and shape (`sigma`).  Supporting functions include: `dUW`, `pUW`, `qUW`, `rUW`.
 
